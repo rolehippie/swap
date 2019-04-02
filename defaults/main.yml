@@ -1,0 +1,4 @@
+swap_size: '{{ ansible_memtotal_mb }}'
+swap_path: /swapfile
+swap_swappiness: 10
+swap_vfs_cache_pressure: 50

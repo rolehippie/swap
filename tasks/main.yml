@@ -1,0 +1,66 @@
+- name: check swap
+  register: swap_stat
+  stat:
+    path: '{{ swap_path }}'
+  tags:
+    - swap
+
+- name: fact current
+  set_fact:
+    swap_current: '{{ (swap_stat.stat.size / 1024 / 1024) | int }}'
+  tags:
+    - swap
+
+- name: fact change
+  set_fact:
+    swap_change: '{{ swap_stat.stat.exists and swap_current != swap_size }}'
+  tags:
+    - swap
+
+- name: disable swap
+  when: swap_change
+  command: 'swapoff {{ swap_path }}'
+  tags:
+    - swap
+
+- name: create file
+  when: swap_change
+  command: 'fallocate -l {{ swap_size }}M {{ swap_path }}'
+  tags:
+    - swap
+
+- name: fix permissions
+  when: swap_change
+  file:
+    path: '{{ swap_path }}'
+    owner: root
+    group: root
+    mode: 0600
+  tags:
+    - swap
+
+- name: format file
+  when: swap_change
+  command: 'mkswap {{ swap_path }}'
+  tags:
+    - swap
+
+- name: enable swap
+  when: swap_change
+  command: 'swapon {{ swap_path }}'
+  tags:
+    - swap
+
+- name: define swappiness
+  sysctl:
+    name: vm.swappiness
+    value: '{{ swap_swappiness }}'
+  tags:
+    - swap
+
+- name: vfs pressure
+  sysctl:
+    name: vm.vfs_cache_pressure
+    value: '{{ swap_vfs_cache_pressure }}'
+  tags:
+    - swap
