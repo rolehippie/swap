@@ -7,7 +7,7 @@
 
 - name: fact current
   set_fact:
-    swap_current: '{{ (swap_stat.stat.size / 1024 / 1024) | int }}'
+    swap_current: '{{ (swap_stat.stat.size | default(0) / 1024 / 1024) | int }}'
   tags:
     - swap
 
