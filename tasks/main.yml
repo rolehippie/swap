@@ -1,4 +1,4 @@
-- when: not (ansible_swaptotal_mb | int) + 1 == swap_size | int
+- when: (ansible_swaptotal_mb | int) + 1 != swap_size | int
   block:
     - name: disable swap
       shell: test -f {{ swap_path }} && swapoff {{ swap_path }} || true
