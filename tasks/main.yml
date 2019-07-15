@@ -1,11 +1,12 @@
-- block:
+- when: not (ansible_swaptotal_mb | int) + 1 == swap_size | int
+  block:
     - name: disable swap
       shell: test -f {{ swap_path }} && swapoff {{ swap_path }} || true
       tags:
         - swap
 
     - name: create file
-      command: 'dd if=/dev/zero of={{ swap_path }} bs=1M count={{ swap_size }}'
+      command: 'fallocate -l {{ swap_size }}M {{ swap_path }}'
       tags:
         - swap
 
@@ -13,7 +14,6 @@
       command: 'mkswap {{ swap_path }}'
       tags:
         - swap
-  when: not (ansible_swaptotal_mb | int) + 1 == swap_size | int
 
 - name: fix permissions
   file:
