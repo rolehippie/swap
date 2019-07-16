@@ -24,7 +24,7 @@
   tags:
     - swap
 
-- name: add swapfile to fstab
+- name: mount swap
   mount:
     src: "{{ swap_path }}"
     path: swap
