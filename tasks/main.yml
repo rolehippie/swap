@@ -1,36 +1,21 @@
-- name: check swap
-  register: swap_stat
-  stat:
-    path: '{{ swap_path }}'
-  tags:
-    - swap
+- when: (ansible_swaptotal_mb | int) + 1 != swap_size | int
+  block:
+    - name: disable swap
+      shell: test -f {{ swap_path }} && swapoff {{ swap_path }} || true
+      tags:
+        - swap
 
-- name: fact current
-  set_fact:
-    swap_current: '{{ (swap_stat.stat.size | default(0) / 1024 / 1024) | int }}'
-  tags:
-    - swap
+    - name: create file
+      command: 'fallocate -l {{ swap_size }}M {{ swap_path }}'
+      tags:
+        - swap
 
-- name: fact change
-  set_fact:
-    swap_change: '{{ swap_stat.stat.exists and swap_current != swap_size }}'
-  tags:
-    - swap
-
-- name: disable swap
-  when: swap_change
-  command: 'swapoff {{ swap_path }}'
-  tags:
-    - swap
-
-- name: create file
-  when: swap_change
-  command: 'fallocate -l {{ swap_size }}M {{ swap_path }}'
-  tags:
-    - swap
+    - name: format file
+      command: 'mkswap {{ swap_path }}'
+      tags:
+        - swap
 
 - name: fix permissions
-  when: swap_change
   file:
     path: '{{ swap_path }}'
     owner: root
@@ -39,15 +24,18 @@
   tags:
     - swap
 
-- name: format file
-  when: swap_change
-  command: 'mkswap {{ swap_path }}'
+- name: mount swap
+  mount:
+    src: "{{ swap_path }}"
+    path: swap
+    fstype: swap
+    state: present
   tags:
     - swap
 
 - name: enable swap
-  when: swap_change
-  command: 'swapon {{ swap_path }}'
+  command: 'swapon -a'
+  changed_when: False
   tags:
     - swap
 
