@@ -1,4 +1,15 @@
+# Standards: 0.1
+---
+# @var swap_size:description: Size of the swapfile to create
 swap_size: '{{ ansible_memtotal_mb }}'
+
+# @var swap_path:description: Path to the swapfile to create
 swap_path: /swapfile
+
+# @var swap_swappiness:description: Set vm.swappiness value
 swap_swappiness: '10'
+
+# @var swap_vfs_cache_pressure:description: Set vm.vfs_cache_pressure value
 swap_vfs_cache_pressure: '50'
+
+...
