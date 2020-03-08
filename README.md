@@ -61,7 +61,7 @@ swap_vfs_cache_pressure: '50'
 
 ## Dependencies
 
-None.
+- None
 
 ## License
 
@@ -69,4 +69,4 @@ Apache-2.0
 
 ## Author
 
-Thomas Boerger
+[Thomas Boerger](https://github.com/tboerger)
