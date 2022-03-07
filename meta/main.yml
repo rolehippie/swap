@@ -20,6 +20,8 @@
 # None
 # @end
 galaxy_info:
+  role_name: swap
+  namespace: rolehippie
   author: Thomas Boerger
   description: Ansible role to create and configure swap storage
   license: Apache-2.0
