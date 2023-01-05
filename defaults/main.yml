@@ -12,4 +12,7 @@ swap_swappiness: '10'
 # @var swap_vfs_cache_pressure:description: Set vm.vfs_cache_pressure value
 swap_vfs_cache_pressure: '50'
 
+# @var swap_force_recreate:description: Enforce recreation of swap
+swap_force_recreate: False
+
 ...

@@ -2,7 +2,9 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    swap_size: 5000
   roles:
-    - role: swap
+    - role: rolehippie.swap
 
 ...
