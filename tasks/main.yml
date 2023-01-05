@@ -1,12 +1,6 @@
 # Standards: 1.2
 ---
-- register: swpa_usage
-  command: cat /proc/swaps
-
-- debug:
-    msg: "{{ swpa_usage }}"
-
-- when: (swap_size | int > (ansible_swaptotal_mb | int) + 1) or (swap_force_recreate | default(False))
+- when: swap_size | int > (ansible_swaptotal_mb | int) + 1
   block:
     - name: Disable active swap
       shell: "test -f {{ swap_path }} && swapoff {{ swap_path }} || true"

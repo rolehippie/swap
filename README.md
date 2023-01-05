@@ -11,7 +11,6 @@ Building and improving this Ansible role have been sponsored by my current and p
 ## Table of content
 
 - [Default Variables](#default-variables)
-  - [swap_force_recreate](#swap_force_recreate)
   - [swap_path](#swap_path)
   - [swap_size](#swap_size)
   - [swap_swappiness](#swap_swappiness)
@@ -24,16 +23,6 @@ Building and improving this Ansible role have been sponsored by my current and p
 ---
 
 ## Default Variables
-
-### swap_force_recreate
-
-Enforce recreation of swap
-
-#### Default value
-
-```YAML
-swap_force_recreate: false
-```
 
 ### swap_path
 
