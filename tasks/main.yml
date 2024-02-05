@@ -1,4 +1,3 @@
-# Standards: 1.2
 ---
 - when: swap_size | int > (ansible_swaptotal_mb | int) + 1
   block:
