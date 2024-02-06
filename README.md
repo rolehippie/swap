@@ -81,7 +81,7 @@ swap_vfs_cache_pressure: '50'
 
 ## Dependencies
 
-- None
+- [ansible.posix](https://github.com/ansible-collections/ansible.posix)
 
 ## License
 
