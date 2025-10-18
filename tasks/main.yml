@@ -1,17 +1,25 @@
 ---
-- when: swap_size | int > (ansible_swaptotal_mb | int) + 1
+- name: Prepare for swap
+  when:
+    - swap_size > ansible_swaptotal_mb + 1
   block:
     - name: Disable active swap
+      failed_when: false
+      changed_when: false
       ansible.builtin.shell: "test -f {{ swap_path }} && swapoff {{ swap_path }} || true"
       tags:
         - swap
 
     - name: Create swap file
+      failed_when: false
+      changed_when: false
       ansible.builtin.command: "fallocate -l {{ swap_size }}M {{ swap_path }}"
       tags:
         - swap
 
     - name: Format swap file
+      failed_when: false
+      changed_when: false
       ansible.builtin.command: "mkswap {{ swap_path }}"
       tags:
         - swap
@@ -36,7 +44,7 @@
 
 - name: Enable swap file
   ansible.builtin.command: "swapon -a"
-  changed_when: False
+  changed_when: false
   tags:
     - swap
 
