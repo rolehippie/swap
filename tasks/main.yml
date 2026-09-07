@@ -1,7 +1,7 @@
 ---
 - name: Prepare for swap
   when:
-    - swap_size > ansible_swaptotal_mb + 1
+    - swap_size > ansible_facts['swaptotal_mb'] + 1
   block:
     - name: Disable active swap
       failed_when: false
