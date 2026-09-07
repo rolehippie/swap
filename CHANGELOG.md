@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/rolehippie/swap/compare/v2.5.1...v2.6.0) (2026-09-07)
+
+### Features
+
+* add separate requirements for molecule run ([f097e4c](https://github.com/rolehippie/swap/commit/f097e4cac5d4ba010974b80a8eedbe268d14d5de))
+* use new required facts as attributes ([b0be6e1](https://github.com/rolehippie/swap/commit/b0be6e161a44650d62d93a41343be543e26b0971))
+
 ## [2.5.1](https://github.com/rolehippie/swap/compare/v2.5.0...v2.5.1) (2026-08-31)
 
 ### Dependencies
