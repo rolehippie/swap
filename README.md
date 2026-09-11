@@ -51,7 +51,7 @@ Size of the swapfile to create
 #### Default value
 
 ```YAML
-swap_size: '{{ ansible_facts['memtotal_mb'] }}'
+swap_size: "{{ ansible_facts['memtotal_mb'] }}"
 ```
 
 ### swap_swappiness
