@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.1](https://github.com/rolehippie/swap/compare/v2.6.0...v2.6.1) (2026-09-11)
+
+### Bugfixes
+
+* use correct quotes for ansible facts usage ([c8e1347](https://github.com/rolehippie/swap/commit/c8e1347af2754d07afd3ecc587c8636595cb17c3))
+
 ## [2.6.0](https://github.com/rolehippie/swap/compare/v2.5.1...v2.6.0) (2026-09-07)
 
 ### Features
